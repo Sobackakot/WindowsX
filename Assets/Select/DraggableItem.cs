@@ -7,7 +7,7 @@ namespace Drag.Item
 {
     public class DraggableItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     { 
-        public Transform m_Transform { get; set; }
+        public Transform accepted_Transform { get; set; }
         public RectTransform rectTransform { get; set; }
         private CanvasGroup canvasGroup;
         private Canvas canvas;
@@ -17,9 +17,9 @@ namespace Drag.Item
         public bool inSelectionFrame { get; private set; }
         private void Awake()
         {
-            m_Transform = GetComponent<Transform>();
+            accepted_Transform = GetComponent<Transform>();
             rectTransform = GetComponent<RectTransform>();
-            canvas = m_Transform.GetComponentInParent<Canvas>();
+            canvas = accepted_Transform.GetComponentInParent<Canvas>();
             canvasGroup = GetComponent<CanvasGroup>();
             line = GetComponent<Outline>(); 
         }
@@ -38,7 +38,7 @@ namespace Drag.Item
             hasHitPointCursor = true;
             canvasGroup.blocksRaycasts = false;
             canvasGroup.alpha = 0.5f;
-            m_Transform = transform.parent;
+            accepted_Transform = transform.parent;
             rectTransform?.SetParent(canvas.transform);
             rectTransform?.SetAsLastSibling();
         }
@@ -56,7 +56,7 @@ namespace Drag.Item
             hasHitPointCursor = false;
             canvasGroup.blocksRaycasts = true;
             canvasGroup.alpha = 1f;
-            rectTransform?.SetParent(m_Transform);
+            rectTransform?.SetParent(accepted_Transform);
         }
         public void SetInSelectionFrame()
         {

@@ -18,8 +18,8 @@ namespace Drag.Resize
 
         private void Awake()
         {
-            canvas = GetComponentInParent<Canvas>(); 
-            target = transform.parent.GetComponent<RectTransform>();
+            canvas = GetComponentInParent<Canvas>();
+            target = GetComponentInParent<HashWIndow>().rectTransform;
         }
 
         public void OnDrag(PointerEventData eventData)
