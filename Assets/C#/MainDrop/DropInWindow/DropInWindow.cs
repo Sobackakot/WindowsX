@@ -1,7 +1,7 @@
 ﻿using Drag.RegisterItem;
 using UnityEngine;
 
-public class DropItemInWindow : DropBase
+public class DropInWindow : DropBase
 { 
     private void Awake()
     {
