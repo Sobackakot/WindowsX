@@ -36,7 +36,8 @@ namespace Drag.Item.Maim
         } 
 
         public void OnBeginDrag(PointerEventData eventData)
-        { 
+        {
+            Debug.Log("begin drag");
             registry?.SetCurrentDraggableItem();
             singleBeginDrag?.OnSingleBeginDrag(eventData, registry.currentDraggableItem); 
             isDragging = multipleBeginDrag.OnMultipleBeginDrag(eventData, registry.currentDraggableItem); 
@@ -61,6 +62,7 @@ namespace Drag.Item.Maim
             registry?.ResetItems();
             registry?.SetCurrentDraggableItem(); 
             registry?.currentDraggableItem?.OnPointerClick(eventData);
+            Debug.Log("click");
         }
          
       

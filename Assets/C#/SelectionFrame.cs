@@ -108,8 +108,8 @@ namespace Drag.SelectItem
                 //провер€ет, пересекаютс€ ли пр€моугольники
                 if (screen.Overlaps(itemRect, true) && item.gameObject.layer == 7)
                 {
-                    item?.SetInSelectionFrame();
-                    item?.LineEnable();
+                    item?.context.SetInSelectionFrame(item.line);
+                    item?.context.LineEnable(item.line);
                     OnAddSelectedItem?.Invoke(item);
                     screenSpaceRect = Rect.zero;
                 }

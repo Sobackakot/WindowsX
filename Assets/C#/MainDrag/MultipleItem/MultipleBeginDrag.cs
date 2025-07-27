@@ -13,7 +13,7 @@ namespace Drag.MultipleItem
             registry = FindObjectOfType<RegistrySelectableItems>();
         }
         public bool OnMultipleBeginDrag(PointerEventData eventData, DraggableItem currentDraggableItem)
-        {
+        { 
             if (registry.selectedItems.Count > 1 && registry.selectedItems.Contains(currentDraggableItem))
             {
                 registry?.ResetOffsetItems();

@@ -8,6 +8,7 @@ namespace Drag.RegisterItem
     public class RegistrySelectableItems : MonoBehaviour
     { 
         public readonly List<DraggableItem> selectedItems = new();
+        public readonly List<DraggableItem> dropItems = new();
         public readonly List<DraggableItem> draggableItems = new();
         public readonly Dictionary<DraggableItem, Vector2> itemsOffset = new();
         
@@ -31,26 +32,37 @@ namespace Drag.RegisterItem
             selection.OnResetSelectedItems -= ResetItems;
         }
         public void SetCurrentDraggableItem()
-        {
+        { 
             currentDraggableItem = null;
             foreach (var item in draggableItems)
             {
-                if (item.hasHitPointCursor)
+                if (item.context.HasHitPointCursor && item.gameObject.layer == 7)
                 {
-                    currentDraggableItem = item;
+                    currentDraggableItem = item; 
                     break;
                 }
             }
         }
-        public void SetItem(DraggableItem items)
+        public void SetItem(DraggableItem item)
         {
-            selectedItems.Add(items);
+            selectedItems.Add(item);  
+            if (item.gameObject.layer == 7)
+            { 
+                dropItems.Add(item); 
+            }
+               
         }
         public void ResetItems()
         {
             foreach (var item in selectedItems)
-                item?.ResetItem();
+                item?.context.ResetInFrame(item.line);
             selectedItems?.Clear();
+        }
+        public void ResetDropItems()
+        {
+            foreach (var item in dropItems)
+                item?.context.ResetInFrame(item.line);
+            dropItems?.Clear();
         }
 
         public void SetOffsetItem(DraggableItem item, Vector2 offset)

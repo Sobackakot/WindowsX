@@ -19,7 +19,7 @@ namespace Drag.Resize
         private void Awake()
         {
             canvas = GetComponentInParent<Canvas>();
-            target = GetComponentInParent<HashWIndow>().rectTransform;
+            target = GetComponentInParent<HashWindowPanel>().rectTransform;
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -44,39 +44,35 @@ namespace Drag.Resize
         }
 
         void ResizeLeft(float dx)
-        {
-            float scale = target.lossyScale.x;
-            dx /= scale;
-            float newWidth = target.rect.width - dx;
+        { 
+            float normalizeDx = dx / target.lossyScale.x;
+            float newWidth = target.rect.width - normalizeDx;
             if(minWidth <= newWidth)
-                target.offsetMin += new Vector2(dx, 0);
+                target.offsetMin += new Vector2(normalizeDx, 0);
         }
 
         void ResizeRight(float dx)
-        {
-            float scale = target.lossyScale.x;
-            dx /= scale;
-            float newWidth = target.rect.width + dx;
+        { 
+            float normalizedDx = dx/ target.lossyScale.x;
+            float newWidth = target.rect.width + normalizedDx;
             if(minWidth <= newWidth)
-                target.offsetMax += new Vector2(dx, 0);
+                target.offsetMax += new Vector2(normalizedDx, 0);
         }
 
         void ResizeTop(float dy)
-        {
-            float scale = target.lossyScale.y;
-            dy /= scale;
-            float newHeight = target.rect.height + dy;
+        { 
+            float normalizedDy = dy / target.lossyScale.y;
+            float newHeight = target.rect.height + normalizedDy;
             if(minHeight <=newHeight)
-                target.offsetMax += new Vector2(0, dy);
+                target.offsetMax += new Vector2(0, normalizedDy);
         }
 
         void ResizeBottom(float dy)
         {
-            float scale = target.lossyScale.y;
-            dy /= scale;
-            float newHeight = target.rect.height - dy;
+            float normalizeDy = dy / target.lossyScale.y;
+            float newHeight = target.rect.height - normalizeDy;
             if(minHeight <=newHeight)
-             target.offsetMin += new Vector2(0, dy);
+             target.offsetMin += new Vector2(0, normalizeDy);
         }
     }
 }

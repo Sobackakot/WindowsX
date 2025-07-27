@@ -15,6 +15,7 @@ namespace Drag.SingleItem
         public void OnSingleEndDrag(PointerEventData eventData, DraggableItem currentDraggableItem)
         {
             currentDraggableItem?.OnEndDrag(eventData);
+            registry?.ResetDropItems();
         }
     }
 }
