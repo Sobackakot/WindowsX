@@ -15,14 +15,14 @@ namespace Drag.MultipleItem
             canvas = GetComponentInParent<Canvas>();
         }
         public void OnMultipleDrag(PointerEventData eventData)
-        {
+        { 
             foreach (var item in registry.selectedItems)
             {
                 if (!registry.itemsOffset.ContainsKey(item)) continue;
                 item.rectTransform.anchoredPosition = GetPointLocalPosition(eventData, item);
             }
         }
-        private Vector2 GetPointLocalPosition(PointerEventData eventData, DraggableItem item)
+        private Vector2 GetPointLocalPosition(PointerEventData eventData, DragBase item)
         {
             Vector2 newPos = eventData.position + registry.GetOffsetItem(item);
             Vector2 localPoint;

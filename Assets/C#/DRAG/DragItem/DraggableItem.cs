@@ -5,6 +5,7 @@ namespace Drag.Item
     public class DraggableItem : DragBase, IPointerEnterHandler, IPointerExitHandler
     {
         TestDrag drag;
+
         private void OnEnable()
         {
             drag = GetComponent<TestDrag>();

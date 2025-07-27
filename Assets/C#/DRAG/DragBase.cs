@@ -1,10 +1,14 @@
+using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(CanvasGroup))]
+[RequireComponent(typeof(Outline))]
 public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public ItemStateContext context; 
+    RegistrySelectableItems reg;
+    public ItemStateContext context { get; private set; }
     public Transform accepted_Transform { get; set; }
     public RectTransform rectTransform { get; set; }
     private Canvas canvas;
@@ -14,6 +18,7 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     private void Awake()
     {
+        reg = FindObjectOfType<RegistrySelectableItems>();
         context = new ItemStateContext();
         accepted_Transform = GetComponent<Transform>();
         rectTransform = GetComponent<RectTransform>();
@@ -58,7 +63,7 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
     
     public void OnPointerEnter(PointerEventData eventData)
-    {
+    { 
         context.LineEnable(line);
         context.PointerEnter();
     }
@@ -71,6 +76,7 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        reg.SetCurrentItem(this);
         context.LineEnable(line); 
         context.PointerEnter();
     }

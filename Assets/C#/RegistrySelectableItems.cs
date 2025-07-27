@@ -1,25 +1,24 @@
+using Drag.SelectItem;
 using System.Collections.Generic;
 using UnityEngine;
-using Drag.Item;
-using Drag.SelectItem;
 
 namespace Drag.RegisterItem
 {
     public class RegistrySelectableItems : MonoBehaviour
     { 
-        public readonly List<DraggableItem> selectedItems = new();
-        public readonly List<DraggableItem> dropItems = new();
-        public readonly List<DraggableItem> draggableItems = new();
-        public readonly Dictionary<DraggableItem, Vector2> itemsOffset = new();
+        public readonly List<DragBase> selectedItems = new();
+        public readonly List<DragBase> dropItems = new();
+        public readonly List<DragBase> draggableItems = new();
+        public readonly Dictionary<DragBase, Vector2> itemsOffset = new();
         
-        public  DraggableItem currentDraggableItem { get; private set; }
+        public DragBase currentDraggableItem { get; private set; }
 
         private SelectionFrame selection;
 
         private void Awake()
         {
             selection = GetComponent<SelectionFrame>();
-            draggableItems.AddRange(GetComponentsInChildren<DraggableItem>(false));  
+            draggableItems.AddRange(GetComponentsInChildren<DragBase>(false));  
         }
         private void OnEnable()
         {
@@ -31,19 +30,24 @@ namespace Drag.RegisterItem
             selection.OnAddSelectedItem -= SetItem;
             selection.OnResetSelectedItems -= ResetItems;
         }
-        public void SetCurrentDraggableItem()
+        public void SetCurrentItem(DragBase currentDraggableItem)
+        {
+            this.currentDraggableItem = currentDraggableItem;
+        }
+        public void FindCurrentDraggableItem()
         { 
             currentDraggableItem = null;
             foreach (var item in draggableItems)
             {
-                if (item.context.HasHitPointCursor && item.gameObject.layer == 7)
+                if (item.context.HasHitPointCursor)
                 {
-                    currentDraggableItem = item; 
+                    currentDraggableItem = item;
+                    Debug.Log("Set new currentItem " + item.gameObject.name);
                     break;
                 }
             }
         }
-        public void SetItem(DraggableItem item)
+        public void SetItem(DragBase item)
         {
             selectedItems.Add(item);  
             if (item.gameObject.layer == 7)
@@ -65,7 +69,7 @@ namespace Drag.RegisterItem
             dropItems?.Clear();
         }
 
-        public void SetOffsetItem(DraggableItem item, Vector2 offset)
+        public void SetOffsetItem(DragBase item, Vector2 offset)
         {
             itemsOffset[item] = offset;
         }
@@ -73,7 +77,7 @@ namespace Drag.RegisterItem
         {
             itemsOffset?.Clear();
         }
-        public Vector2 GetOffsetItem(DraggableItem item)
+        public Vector2 GetOffsetItem(DragBase item)
         {
             return itemsOffset[item];
         }

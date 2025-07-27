@@ -12,7 +12,7 @@ namespace Drag.SingleItem
         {
             registry = FindObjectOfType<RegistrySelectableItems>();
         }
-        public void OnSingleBeginDrag(PointerEventData eventData, DraggableItem currentDraggableItem)
+        public void OnSingleBeginDrag(PointerEventData eventData, DragBase currentDraggableItem)
         { 
 
             if (registry.selectedItems.Count <= 1 || !registry.selectedItems.Contains(currentDraggableItem))

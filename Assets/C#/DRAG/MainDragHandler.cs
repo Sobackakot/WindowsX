@@ -1,9 +1,8 @@
-using UnityEngine;
-using UnityEngine.EventSystems;
+using Drag.MultipleItem;
 using Drag.RegisterItem;
 using Drag.SingleItem;
-using Drag.MultipleItem;
-using Drag.Resize;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 namespace Drag.Item.Maim
@@ -36,9 +35,8 @@ namespace Drag.Item.Maim
         } 
 
         public void OnBeginDrag(PointerEventData eventData)
-        {
-            Debug.Log("begin drag");
-            registry?.SetCurrentDraggableItem();
+        {  
+            registry?.FindCurrentDraggableItem();
             singleBeginDrag?.OnSingleBeginDrag(eventData, registry.currentDraggableItem); 
             isDragging = multipleBeginDrag.OnMultipleBeginDrag(eventData, registry.currentDraggableItem); 
         }
@@ -60,9 +58,8 @@ namespace Drag.Item.Maim
         public void OnPointerClick(PointerEventData eventData)
         {
             registry?.ResetItems();
-            registry?.SetCurrentDraggableItem(); 
-            registry?.currentDraggableItem?.OnPointerClick(eventData);
-            Debug.Log("click");
+            registry?.FindCurrentDraggableItem(); 
+            registry?.currentDraggableItem?.OnPointerClick(eventData); 
         }
          
       

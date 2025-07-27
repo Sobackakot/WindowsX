@@ -8,5 +8,6 @@ public class DropInSpace : DropBase
         reg = FindObjectOfType<RegistrySelectableItems>();
         rectTransform = GetComponent<RectTransform>();
         targetContent = rectTransform.GetComponent<Canvas>()?.transform;
+        Debug.Log(targetContent.gameObject.name);
     }
 }

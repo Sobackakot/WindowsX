@@ -1,3 +1,4 @@
+using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,7 @@ public class ItemStateContext
     public void SetIsHasSlotParent(bool isHasSlot) => IsHasSlotParent = isHasSlot;
     public void SetIsActive(bool isActive) => IsActive = isActive;
 
+    
     public void SetInFrame(Outline line)
     {
        SetInSelectionFrame(true);

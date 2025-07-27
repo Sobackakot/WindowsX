@@ -5,17 +5,17 @@ using Drag.RegisterItem;
 
 namespace Drag.SingleItem
 {
-    public class SingleDrag : MonoBehaviour
+    public class SingleEndDrag : MonoBehaviour
     {
         RegistrySelectableItems registry;
         private void Awake()
         {
             registry = FindObjectOfType<RegistrySelectableItems>();
         }
-        public void OnSingleDrag(PointerEventData eventData, DraggableItem currentDraggableItem)
+        public void OnSingleEndDrag(PointerEventData eventData, DragBase currentDraggableItem)
         {
-            currentDraggableItem?.OnDrag(eventData);
-            return;
+            currentDraggableItem?.OnEndDrag(eventData);
+            registry?.ResetDropItems();
         }
     }
 }
