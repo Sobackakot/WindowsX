@@ -48,8 +48,7 @@ namespace Drag.RegisterItem
             }
         }
         public void SetItem(DraggableItemBase item)
-        {
-            Debug.Log("set items");
+        { 
             selectedItems.Add(item);  
             if (item.gameObject.layer == 7)
             { 
@@ -58,8 +57,7 @@ namespace Drag.RegisterItem
                
         }
         public void ResetItems()
-        {
-            Debug.Log("reset");
+        { 
             foreach (var item in selectedItems)
                 item?.context.ResetInFrame(item.line);
             selectedItems?.Clear();

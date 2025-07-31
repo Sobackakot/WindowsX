@@ -15,8 +15,7 @@ public class DropItemBase : MonoBehaviour, IDropHandler
         targetContent = rectTransform.GetComponentInChildren<HashContent>()?.transform;
     }
     public void OnDrop(PointerEventData eventData)
-    { 
-        Debug.Log(GetType().Name);
+    {  
         if (reg.dropItems.Count > 1)
             MultipleDrop(targetContent);
 

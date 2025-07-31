@@ -53,8 +53,7 @@ public class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
     }
 
     public void OnEndDrag(PointerEventData eventData)
-    {
-        Debug.Log("end drag");
+    { 
         context.SetHasHitPointCursor(false);
         context.SetIsDraggableItem(false);
 
