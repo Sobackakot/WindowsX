@@ -1,7 +1,6 @@
-using Drag.Item;
+using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using Drag.RegisterItem;
 
 namespace Drag.MultipleItem
 {

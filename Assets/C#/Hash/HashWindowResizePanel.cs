@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HashWindowPanel : MonoBehaviour
+public class HashWindowResizePanel : MonoBehaviour
 {
     public RectTransform rectTransform { get; private set; }
     private void Awake()

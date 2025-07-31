@@ -3,11 +3,12 @@ using Drag.RegisterItem;
 using Drag.SingleItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 namespace Drag.Item.Maim
 {
-    public class MainDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
+    public class MainDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
         private RegistrySelectableItems registry; 
 
@@ -19,6 +20,8 @@ namespace Drag.Item.Maim
         private SingleDrag singleDrag;
         private SingleEndDrag singleEndDrag; 
         private bool isDraggingAll = false;
+
+        private ScrollRect scrollRect;
 
         private void Awake()
         {
@@ -54,15 +57,28 @@ namespace Drag.Item.Maim
             singleEndDrag?.OnSingleEndDrag(eventData, registry.currentDraggableItem); 
         }
 
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            registry?.FindCurrentDraggableItem();
+            registry?.currentDraggableItem?.OnPointerDown(eventData);
+            scrollRect = registry?.currentDraggableItem?.GetComponentInParent<ScrollRect>();
+            if(scrollRect!=null)
+            scrollRect.enabled = false;
+        }
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            registry?.currentDraggableItem?.OnPointerUp(eventData);
+            if (scrollRect != null)
+                scrollRect.enabled = true;
+        }
+
         public void OnPointerClick(PointerEventData eventData)
-        { 
-            if(!isDraggingAll)
-                registry?.ResetItems();
-            registry?.FindCurrentDraggableItem(); 
+        {
+            if (!isDraggingAll)
+                registry?.ResetItems();  
             registry?.currentDraggableItem?.OnPointerClick(eventData);
             isDraggingAll = false;
-        }
-         
-      
+        }   
     }
 }

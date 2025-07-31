@@ -19,7 +19,7 @@ namespace Drag.Resize
         private void Awake()
         {
             canvas = GetComponentInParent<Canvas>();
-            target = GetComponentInParent<HashWindowPanel>().rectTransform;
+            target = GetComponentInParent<HashWindowResizePanel>().rectTransform;
         }
 
         public void OnDrag(PointerEventData eventData)

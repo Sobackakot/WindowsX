@@ -2,18 +2,13 @@ using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DropItemBase : MonoBehaviour, IDropHandler
+public abstract class DropItemBase : MonoBehaviour, IDropHandler
 {
     protected RegistrySelectableItems reg;
     protected RectTransform rectTransform;
     protected Transform targetContent;
 
-    private void Awake()
-    {
-        reg = FindObjectOfType<RegistrySelectableItems>();
-        rectTransform = GetComponent<RectTransform>();
-        targetContent = rectTransform.GetComponentInChildren<HashContent>()?.transform;
-    }
+    
     public void OnDrop(PointerEventData eventData)
     {  
         if (reg.dropItems.Count > 1)
@@ -25,6 +20,7 @@ public class DropItemBase : MonoBehaviour, IDropHandler
     private void SingleDrop(Transform trTarget)
     {
         DraggableItemBase item = reg.currentDraggableItem;
+        if (item.gameObject.layer != 7) return;
         Drop(item, trTarget);
     }
 

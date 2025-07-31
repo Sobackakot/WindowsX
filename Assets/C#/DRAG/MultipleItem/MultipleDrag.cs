@@ -1,4 +1,3 @@
-using Drag.Item;
 using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,20 +14,15 @@ namespace Drag.MultipleItem
             canvas = GetComponentInParent<Canvas>();
         }
         public void OnMultipleDrag(PointerEventData eventData)
-        { 
+        {
+            Vector2 currentCursorLocalPointOnCanvas;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                canvas.transform as RectTransform, eventData.position, eventData.pressEventCamera, out currentCursorLocalPointOnCanvas);
             foreach (var item in registry.selectedItems)
             {
                 if (!registry.itemsOffset.ContainsKey(item)) continue;
-                item.rectTransform.anchoredPosition = GetPointLocalPosition(eventData, item);
+                item.rectTransform.anchoredPosition = currentCursorLocalPointOnCanvas + registry.GetOffsetItem(item);
             }
-        }
-        private Vector2 GetPointLocalPosition(PointerEventData eventData, DraggableItemBase item)
-        {
-            Vector2 newPos = eventData.position + registry.GetOffsetItem(item);
-            Vector2 localPoint;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                canvas.transform as RectTransform, newPos, eventData.pressEventCamera, out localPoint);
-            return localPoint;
-        }
+        } 
     }
 }

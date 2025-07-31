@@ -49,10 +49,12 @@ namespace Drag.RegisterItem
         }
         public void SetItem(DraggableItemBase item)
         { 
-            selectedItems.Add(item);  
+              
             if (item.gameObject.layer == 7)
-            { 
-                dropItems.Add(item); 
+            {
+                selectedItems.Add(item);
+                dropItems.Add(item);
+                Debug.Log(item.gameObject.name);
             }
                
         }
