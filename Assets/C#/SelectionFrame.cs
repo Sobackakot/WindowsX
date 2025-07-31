@@ -7,7 +7,7 @@ namespace Drag.SelectItem
 {
     public class SelectionFrame : MonoBehaviour
     { 
-        public event Action<DragBase> OnAddSelectedItem; 
+        public event Action<DraggableItemBase> OnAddSelectedItem; 
         public event Func<bool> OnPointerEnter;
         public event Action OnResetSelectedItems;
 
@@ -117,7 +117,7 @@ namespace Drag.SelectItem
         }
 
         //Вычисляет прямоугольник (DraggableItem item) - UI-объекта на экране
-        private Rect GetRectItem(DragBase item)
+        private Rect GetRectItem(DraggableItemBase item)
         {
             Vector3[] positions = new Vector3[4];
             item?.rectTransform.GetWorldCorners(positions);//возвращает 4 угла RectTransform в мировых координатах.

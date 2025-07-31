@@ -18,7 +18,7 @@ namespace Drag.Item.Maim
         private SingleBeginDrag singleBeginDrag;
         private SingleDrag singleDrag;
         private SingleEndDrag singleEndDrag; 
-        private bool isDragging = false;
+        private bool isDraggingAll = false;
 
         private void Awake()
         {
@@ -38,12 +38,12 @@ namespace Drag.Item.Maim
         {  
             registry?.FindCurrentDraggableItem();
             singleBeginDrag?.OnSingleBeginDrag(eventData, registry.currentDraggableItem); 
-            isDragging = multipleBeginDrag.OnMultipleBeginDrag(eventData, registry.currentDraggableItem); 
+            isDraggingAll = multipleBeginDrag.OnMultipleBeginDrag(eventData, registry.currentDraggableItem); 
         }
 
         public void OnDrag(PointerEventData eventData)
         { 
-            if (!isDragging)
+            if (!isDraggingAll)
                 singleDrag?.OnSingleDrag(eventData, registry.currentDraggableItem);
             multipleDrag?.OnMultipleDrag(eventData);
         }
@@ -51,15 +51,16 @@ namespace Drag.Item.Maim
         public void OnEndDrag(PointerEventData eventData)
         {
             multipleEndDrag?.OnMultipleEndDrag(eventData);
-            singleEndDrag?.OnSingleEndDrag(eventData, registry.currentDraggableItem);
-            isDragging = false;
+            singleEndDrag?.OnSingleEndDrag(eventData, registry.currentDraggableItem); 
         }
 
         public void OnPointerClick(PointerEventData eventData)
-        {
-            registry?.ResetItems();
+        { 
+            if(!isDraggingAll)
+                registry?.ResetItems();
             registry?.FindCurrentDraggableItem(); 
-            registry?.currentDraggableItem?.OnPointerClick(eventData); 
+            registry?.currentDraggableItem?.OnPointerClick(eventData);
+            isDraggingAll = false;
         }
          
       

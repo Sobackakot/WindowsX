@@ -2,13 +2,18 @@ using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class DropBase : MonoBehaviour, IDropHandler
+public class DropItemBase : MonoBehaviour, IDropHandler
 {
     protected RegistrySelectableItems reg;
     protected RectTransform rectTransform;
     protected Transform targetContent;
 
-
+    private void Awake()
+    {
+        reg = FindObjectOfType<RegistrySelectableItems>();
+        rectTransform = GetComponent<RectTransform>();
+        targetContent = rectTransform.GetComponentInChildren<HashContent>()?.transform;
+    }
     public void OnDrop(PointerEventData eventData)
     { 
         Debug.Log(GetType().Name);
@@ -20,7 +25,7 @@ public abstract class DropBase : MonoBehaviour, IDropHandler
     }
     private void SingleDrop(Transform trTarget)
     {
-        DragBase item = reg.currentDraggableItem;
+        DraggableItemBase item = reg.currentDraggableItem;
         Drop(item, trTarget);
     }
 
@@ -33,16 +38,13 @@ public abstract class DropBase : MonoBehaviour, IDropHandler
         }
         reg.dropItems.Clear();
     }
-    private static void Drop(DragBase item, Transform trTarget)
+    private static void Drop(DraggableItemBase item, Transform trTarget)
     { 
         if (item == null || trTarget == null) return;
    
         item.accepted_Transform = trTarget;
         item?.transform.SetParent(trTarget);
         item?.context.LineDisable(item.line);
-        item?.context.ResetBlocksRaycast(true, 1f, item.canvasGroup);
-       
-        if (item.context.IsActive)
-            item.enabled = false; 
+        item?.context.ResetBlocksRaycast(true, 1f, item.canvasGroup); 
     }
 }

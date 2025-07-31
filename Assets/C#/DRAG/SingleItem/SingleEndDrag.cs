@@ -12,7 +12,7 @@ namespace Drag.SingleItem
         {
             registry = FindObjectOfType<RegistrySelectableItems>();
         }
-        public void OnSingleEndDrag(PointerEventData eventData, DragBase currentDraggableItem)
+        public void OnSingleEndDrag(PointerEventData eventData, DraggableItemBase currentDraggableItem)
         {
             currentDraggableItem?.OnEndDrag(eventData);
             registry?.ResetDropItems();

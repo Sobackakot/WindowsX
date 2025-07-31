@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-public  class DragWindow : DragBase, IPointerEnterHandler, IPointerExitHandler
+public  class DragWindow : DraggableItemBase, IPointerEnterHandler, IPointerExitHandler
 { 
     private void OnEnable()
     { 

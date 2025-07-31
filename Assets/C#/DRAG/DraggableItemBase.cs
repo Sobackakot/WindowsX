@@ -2,12 +2,9 @@ using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-[RequireComponent(typeof(CanvasGroup))]
-[RequireComponent(typeof(Outline))]
-public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{
-    RegistrySelectableItems reg;
+ 
+public class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{ 
     public ItemStateContext context { get; private set; }
     public Transform accepted_Transform { get; set; }
     public RectTransform rectTransform { get; set; }
@@ -17,8 +14,7 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
 
     private void Awake()
-    {
-        reg = FindObjectOfType<RegistrySelectableItems>();
+    { 
         context = new ItemStateContext();
         accepted_Transform = GetComponent<Transform>();
         rectTransform = GetComponent<RectTransform>();
@@ -30,11 +26,14 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         line.enabled = false;
         context.SetHasHitPointCursor(false);
-  
+        context.SetIsActive(true);
+
     }
     private void OnDisable()
-    { 
-        line.enabled = false; 
+    {
+        context.SetIsActive(false);
+
+        line.enabled = false;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -55,6 +54,7 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("end drag");
         context.SetHasHitPointCursor(false);
         context.SetIsDraggableItem(false);
 
@@ -70,13 +70,14 @@ public abstract class DragBase : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        context.SetHasHitPointCursor(false);
         context.LineDisable(line);
         context.PointerExit();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        reg.SetCurrentItem(this);
+        context.SetHasHitPointCursor(true);
         context.LineEnable(line); 
         context.PointerEnter();
     }

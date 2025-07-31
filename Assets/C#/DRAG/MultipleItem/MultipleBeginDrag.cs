@@ -12,7 +12,7 @@ namespace Drag.MultipleItem
         {
             registry = FindObjectOfType<RegistrySelectableItems>();
         }
-        public bool OnMultipleBeginDrag(PointerEventData eventData, DragBase currentDraggableItem)
+        public bool OnMultipleBeginDrag(PointerEventData eventData, DraggableItemBase currentDraggableItem)
         { 
             if (registry.selectedItems.Count > 1 && registry.selectedItems.Contains(currentDraggableItem))
             {
@@ -28,8 +28,7 @@ namespace Drag.MultipleItem
             {
                 Vector2 offset = (Vector2)item.rectTransform.position - eventData.position;
                 registry?.SetOffsetItem(item, offset);
-                item.GetComponent<CanvasGroup>().blocksRaycasts = false;
-                item.GetComponent<CanvasGroup>().alpha = 0.6f;
+                item.OnBeginDrag(eventData);
             }
         }
     }

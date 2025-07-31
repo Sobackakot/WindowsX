@@ -22,7 +22,7 @@ namespace Drag.MultipleItem
                 item.rectTransform.anchoredPosition = GetPointLocalPosition(eventData, item);
             }
         }
-        private Vector2 GetPointLocalPosition(PointerEventData eventData, DragBase item)
+        private Vector2 GetPointLocalPosition(PointerEventData eventData, DraggableItemBase item)
         {
             Vector2 newPos = eventData.position + registry.GetOffsetItem(item);
             Vector2 localPoint;

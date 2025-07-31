@@ -15,9 +15,9 @@ namespace Drag.MultipleItem
         public void OnMultipleEndDrag(PointerEventData eventData)
         {
             foreach (var item in registry.selectedItems)
-            {
-                item.GetComponent<CanvasGroup>().blocksRaycasts = true;
-                item.GetComponent<CanvasGroup>().alpha = 1f;
+            { 
+                item.OnEndDrag(eventData);
+                item.context.LineEnable(item.line);
             }
             registry?.ResetOffsetItems();
         }
