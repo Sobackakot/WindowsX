@@ -4,55 +4,41 @@ public class DragItems : DraggableItemBase
 {
     public override void OnBeginDrag(PointerEventData eventData)
     {
-        context.SetIsDraggableItem(true);
-        context.SetHasHitPointCursor(true);
-        context.ResetBlocksRaycast(false, 0.5f, canvasGroup);
-        accepted_Transform = transform.parent;
-        rectTransform?.SetParent(canvas.transform);
-        rectTransform?.SetAsLastSibling();
+        base.OnBeginDrag(eventData);
     }
 
     public override void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-        context.SetHasHitPointCursor(true);
-        context.SetIsDraggableItem(true);
+        base.OnDrag(eventData);
     }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
-        context.SetHasHitPointCursor(false);
-        context.SetIsDraggableItem(false);
-
-        context.ResetBlocksRaycast(true, 1, canvasGroup);
-        rectTransform?.SetParent(accepted_Transform);
+        base.OnEndDrag(eventData);
     }
 
     public override void OnPointerEnter(PointerEventData eventData)
     {
-        context.LineEnable(line);
-        context.PointerEnter();
+        base.OnPointerEnter(eventData);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
     {
-        context.SetHasHitPointCursor(false);
-        context.LineDisable(line);
-        context.PointerExit();
+        base.OnPointerExit(eventData);
     }
 
     public override void OnPointerClick(PointerEventData eventData)
     {
-        context.SetHasHitPointCursor(true);
-        context.LineEnable(line);
-        context.PointerEnter(); 
+        base.OnPointerClick(eventData);
     }
 
     public override void OnPointerDown(PointerEventData eventData)
-    { 
+    {
+        base.OnPointerClick(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
-    { 
+    {
+        base.OnPointerUp(eventData);
     }
 }
