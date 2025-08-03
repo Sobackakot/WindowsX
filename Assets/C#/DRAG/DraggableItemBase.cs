@@ -59,20 +59,18 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
 
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
-        context.LineEnable(line);// -----
+        context.LineEnable(line);
         context.PointerEnter();
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
-    {
-        context.SetHasHitPointCursor(false);// -----
+    { 
         context.LineDisable(line);
         context.PointerExit();
     }
 
     public virtual void OnPointerClick(PointerEventData eventData)
-    {
-        context.SetHasHitPointCursor(true);// -----
+    { 
         context.LineEnable(line);
         context.PointerEnter();
     }

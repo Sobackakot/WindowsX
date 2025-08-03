@@ -106,7 +106,7 @@ namespace Drag.SelectItem
             {
                 Rect itemRect = GetRectItem(item);
                 //провер€ет, пересекаютс€ ли пр€моугольники
-                if (screen.Overlaps(itemRect, true) && item.gameObject.layer == 7)
+                if (screen.Overlaps(itemRect, true) && item.gameObject.layer == 7)//-----
                 {
                     item?.context.SetInSelectionFrame(item.line);
                     item?.context.LineEnable(item.line);

@@ -1,7 +1,6 @@
 using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 namespace Drag.MultipleItem   
 {

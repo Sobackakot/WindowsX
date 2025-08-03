@@ -21,7 +21,7 @@ namespace Drag.Item.Maim
         private SingleEndDrag singleEndDrag; 
         private bool isDraggingAll = false;
 
-        private ScrollRect scrollRect;
+        private ScrollRect scrollRect;//-------------
 
         private void Awake()
         {
@@ -54,11 +54,12 @@ namespace Drag.Item.Maim
         public void OnEndDrag(PointerEventData eventData)
         {
             multipleEndDrag?.OnMultipleEndDrag(eventData);
-            singleEndDrag?.OnSingleEndDrag(eventData, registry.currentDraggableItem); 
+            singleEndDrag?.OnSingleEndDrag(eventData, registry.currentDraggableItem);
+            //----
         }
 
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)//----
         {
             registry?.FindCurrentDraggableItem();
             registry?.currentDraggableItem?.OnPointerDown(eventData);
@@ -66,14 +67,14 @@ namespace Drag.Item.Maim
             if(scrollRect!=null)
             scrollRect.enabled = false;
         }
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)//----
         {
             registry?.currentDraggableItem?.OnPointerUp(eventData);
             if (scrollRect != null)
                 scrollRect.enabled = true;
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)//----
         {
             if (!isDraggingAll)
                 registry?.ResetItems();  

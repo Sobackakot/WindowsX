@@ -53,8 +53,7 @@ namespace Drag.RegisterItem
             if (item.gameObject.layer == 7)
             {
                 selectedItems.Add(item);
-                dropItems.Add(item);
-                Debug.Log(item.gameObject.name);
+                dropItems.Add(item); 
             }
                
         }
@@ -64,7 +63,7 @@ namespace Drag.RegisterItem
                 item?.context.ResetInFrame(item.line);
             selectedItems?.Clear();
         }
-        public void ResetDropItems()
+        public void ResetDropItems()//----
         {
             foreach (var item in dropItems)
                 item?.context.ResetInFrame(item.line);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class DropInWindow : DropItemBase
 {
-    private void Awake()
+    private void Awake()//----
     {
         reg = FindObjectOfType<RegistrySelectableItems>();
         rectTransform = GetComponent<RectTransform>();

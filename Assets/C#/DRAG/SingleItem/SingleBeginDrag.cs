@@ -17,7 +17,7 @@ namespace Drag.SingleItem
 
             if (registry.selectedItems.Count <= 1 || !registry.selectedItems.Contains(currentDraggableItem))
             {
-                registry?.ResetItems();
+                registry?.ResetItems();//---
                 currentDraggableItem?.OnBeginDrag(eventData);
             }
         }
