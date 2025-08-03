@@ -24,13 +24,11 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
     private void OnEnable()
     {
         line.enabled = false;
-        context.SetHasHitPointCursor(false);
-        context.SetIsActive(true);
+        context.SetHasHitPointCursor(false); 
 
     }
     private void OnDisable()
-    {
-        context.SetIsActive(false); 
+    { 
         line.enabled = false;
     }
     public virtual void OnBeginDrag(PointerEventData eventData)

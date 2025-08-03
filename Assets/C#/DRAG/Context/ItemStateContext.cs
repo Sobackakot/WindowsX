@@ -5,15 +5,11 @@ public class ItemStateContext
 {
     public bool HasHitPointCursor { get; private set; }
     public bool IsDraggableItem { get; private set; }
-    public bool InSelectionFrame { get; private set; }
-    public bool IsHasSlotParent { get; private set; }
-    public bool IsActive { get; private set; } 
+    public bool InSelectionFrame { get; private set; } 
 
     public void SetHasHitPointCursor(bool isHit) => HasHitPointCursor = isHit;
     public void SetIsDraggableItem(bool isDrag) => IsDraggableItem = isDrag;
-    public void SetInSelectionFrame(bool inFrame) => InSelectionFrame = inFrame;
-    public void SetIsHasSlotParent(bool isHasSlot) => IsHasSlotParent = isHasSlot;
-    public void SetIsActive(bool isActive) => IsActive = isActive;
+    public void SetInSelectionFrame(bool inFrame) => InSelectionFrame = inFrame; 
 
     
     public void SetInFrame(Outline line)
