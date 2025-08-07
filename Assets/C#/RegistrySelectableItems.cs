@@ -6,9 +6,9 @@ namespace Drag.RegisterItem
 {
     public class RegistrySelectableItems : MonoBehaviour
     { 
-        public readonly List<DraggableItemBase> selectedItems = new();
-        public readonly List<DraggableItemBase> dropItems = new();
-        public readonly List<DraggableItemBase> draggableItems = new();
+        public  List<DraggableItemBase> selectedItems = new();
+        public  List<DraggableItemBase> dropItems = new();
+        public  List<DraggableItemBase> draggableItems = new();
         public readonly Dictionary<DraggableItemBase, Vector2> itemsOffset = new();
         
         public DraggableItemBase currentDraggableItem { get; private set; }
@@ -22,12 +22,12 @@ namespace Drag.RegisterItem
         }
         private void OnEnable()
         {
-            selection.OnAddSelectedItem += SetItem;
+            selection.OnAddSelectedItem += AddItemDropAndSelect;
             selection.OnResetSelectedItems += ResetItems;
         }
         private void OnDisable()
         {
-            selection.OnAddSelectedItem -= SetItem;
+            selection.OnAddSelectedItem -= AddItemDropAndSelect;
             selection.OnResetSelectedItems -= ResetItems;
         }
         public void SetCurrentItem(DraggableItemBase currentDraggableItem)
@@ -47,15 +47,21 @@ namespace Drag.RegisterItem
                 }
             }
         }
-        public void SetItem(DraggableItemBase item)
-        { 
-              
-            if (item.gameObject.layer == 7)
+        public void AddItemDrag(DraggableItemBase item)
+        {
+            if (!draggableItems.Contains(item))
+                draggableItems?.Add(item);
+            Debug.Log(item.gameObject.name);
+        }
+         
+        public void AddItemDropAndSelect(DraggableItemBase item)
+        {  
+            if (item.gameObject.layer == 7  && !selectedItems.Contains(item))
             {
+                Debug.Log(item.gameObject.name);
                 selectedItems.Add(item);
                 dropItems.Add(item); 
-            }
-               
+            } 
         }
         public void ResetItems()
         { 

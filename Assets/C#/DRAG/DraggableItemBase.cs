@@ -1,9 +1,12 @@
+using Drag.RegisterItem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{ 
+{
+    private RegistrySelectableItems reg;
+    [field: SerializeField]public ItemData itemData { get; private set; }
     public ItemStateContext context { get; private set; }
     public Transform accepted_Transform { get; set; }
     public RectTransform rectTransform { get; set; }
@@ -17,19 +20,25 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
         context = new ItemStateContext();
         accepted_Transform = GetComponent<Transform>();
         rectTransform = GetComponent<RectTransform>();
-        canvas = accepted_Transform.GetComponentInParent<Canvas>();
+       
         canvasGroup = GetComponent<CanvasGroup>();
         line = GetComponent<Outline>();
+        reg = FindObjectOfType<RegistrySelectableItems>();
     }
     private void OnEnable()
-    {
+    { 
         line.enabled = false;
-        context.SetHasHitPointCursor(false); 
-
+        context.SetHasHitPointCursor(false);
+        reg.AddItemDropAndSelect(this);
+        reg.AddItemDrag(this); 
     }
     private void OnDisable()
     { 
-        line.enabled = false;
+        line.enabled = false; 
+    }
+    private void Start()
+    {
+        canvas = accepted_Transform.GetComponentInParent<Canvas>();
     }
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
