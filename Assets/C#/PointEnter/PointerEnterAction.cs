@@ -8,18 +8,18 @@ namespace Drag.SelectItem
 {
     public class PointerEnterAction : MonoBehaviour
     {
-        private SelectionFrame select;
+        private SelectionFrame select; 
         private void Awake()
         {
-            select = GetComponent<SelectionFrame>();
+            select = GetComponent<SelectionFrame>(); 
         }
         private void OnEnable()
         {
-            select.OnPointerEnter += IsPointerOverAnyDraggable;
+            select.OnPointerEnter += IsPointerOverAnyDraggable; 
         }
         private void OnDisable()
         {
-            select.OnPointerEnter -= IsPointerOverAnyDraggable;
+            select.OnPointerEnter -= IsPointerOverAnyDraggable; 
         }
         public bool IsPointerOverAnyDraggable()
         {

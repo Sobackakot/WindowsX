@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: folder
   m_EditorClassIdentifier: 
   nameItem: NewFolder
-  sriteItem: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  sriteItem: {fileID: 21300000, guid: c9158b5016c922349be0ec8081f66944, type: 3}
   textItem: 
   prefabItem: {fileID: 5072828503227750404, guid: 3b24c87152dfa3244b192cd515e090e3, type: 3}
   itemType: 0

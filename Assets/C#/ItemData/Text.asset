@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Text
   m_EditorClassIdentifier: 
   nameItem: NewText
-  sriteItem: {fileID: 10915, guid: 0000000000000000f000000000000000, type: 0}
+  sriteItem: {fileID: 21300036, guid: 2679298c6c5b9124aad8f092d1770d59, type: 3}
   textItem: 
   prefabItem: {fileID: 2336703535274224667, guid: ddecda5d78211594ab7b64b8a663719e, type: 3}
   itemType: 1

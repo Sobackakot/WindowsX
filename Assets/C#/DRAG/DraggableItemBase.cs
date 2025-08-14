@@ -1,19 +1,27 @@
 using Drag.RegisterItem;
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    public Action onPointerMouseEnter;
+    private MenuWindow menu;
+
     private RegistrySelectableItems reg;
-    [field: SerializeField]public ItemData itemData { get; private set; }
+    [field: SerializeField] public ItemData currentItemData { get; private set; }
     public ItemStateContext context { get; private set; }
+
     public Transform accepted_Transform { get; set; }
     public RectTransform rectTransform { get; set; }
     public Canvas canvas { get; private set; }
     public Outline line { get; private set; }
     public CanvasGroup canvasGroup { get; private set; }
 
+    public Image image { get; private set; }
+    public TextMeshProUGUI textMesh { get; private set; }
 
     private void Awake()
     { 
@@ -24,6 +32,12 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
         canvasGroup = GetComponent<CanvasGroup>();
         line = GetComponent<Outline>();
         reg = FindObjectOfType<RegistrySelectableItems>();
+
+        textMesh = GetComponentInChildren<TextMeshProUGUI>();
+        image = GetComponent<Image>();
+
+        menu = FindObjectOfType<MenuWindow>();
+        onPointerMouseEnter = menu.onPointerMouseEnter;
     }
     private void OnEnable()
     { 
@@ -70,12 +84,14 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
     {
         context.LineEnable(line);
         context.PointerEnter();
+        reg?.FindCurrentDraggableItem();
+        onPointerMouseEnter?.Invoke();
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     { 
         context.LineDisable(line);
-        context.PointerExit();
+        context.PointerExit(); 
     }
 
     public virtual void OnPointerClick(PointerEventData eventData)
@@ -90,5 +106,14 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
 
     public virtual void OnPointerUp(PointerEventData eventData)
     {
+    }
+    public void SetDataComponents(ItemData itemData)
+    {
+        if(textMesh != null && image != null)
+        {
+            currentItemData = itemData;
+            textMesh.text = currentItemData.nameItem;
+            image.sprite = currentItemData.sriteItem;
+        } 
     }
 }
