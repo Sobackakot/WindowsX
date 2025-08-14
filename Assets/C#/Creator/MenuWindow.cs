@@ -1,11 +1,10 @@
 using Drag.RegisterItem;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine; 
 
 public class MenuWindow : MonoBehaviour 
-{
-    public Action onPointerMouseEnter;
+{ 
 
     public List<ItemData> items = new();
     public Dictionary<ItemType,ItemData> itemsType = new();
@@ -25,12 +24,12 @@ public class MenuWindow : MonoBehaviour
     private void OnEnable()
     {
         mainPanelTrans = FindObjectOfType<HashDropContentOnPanel>(mainPanelTrans).transform;
-        onPointerMouseEnter += OnMousePointerEnter;
+        OnMousePointerEnter();
     }
     private void OnDisable()
-    {
-        onPointerMouseEnter -= OnMousePointerEnter;
+    { 
     }
+ 
     private void OnMousePointerEnter() 
     { 
         if (registry.currentDraggableItem != null)
@@ -63,5 +62,6 @@ public class MenuWindow : MonoBehaviour
     {
 
     }
-     
+
+   
 }

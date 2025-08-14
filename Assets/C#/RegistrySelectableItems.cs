@@ -56,8 +56,7 @@ namespace Drag.RegisterItem
             { 
                 itemsId.Add(id, item);
                 AddItemDrag(item);
-                AddItemDropAndSelect(item);
-                Debug.Log("add " + id);
+                AddItemDropAndSelect(item); 
             }
         } 
         public void AddItemDrag(DraggableItemBase item)
@@ -77,8 +76,7 @@ namespace Drag.RegisterItem
         public void RemoveItem(string id)
         {
             if(itemsId.TryGetValue(id, out var item))
-            {
-                Debug.Log("remove");
+            { 
                 Destroy(item.gameObject);
                 itemsId?.Remove(id);
                 draggableItems?.Remove(item);

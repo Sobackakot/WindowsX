@@ -6,10 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{
-    public Action onPointerMouseEnter;
-    private MenuWindow menu;
-
+{ 
     private RegistrySelectableItems reg;
     [field: SerializeField] public ItemData currentItemData { get; private set; }
     public ItemStateContext context { get; private set; }
@@ -35,9 +32,7 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
 
         textMesh = GetComponentInChildren<TextMeshProUGUI>();
         image = GetComponent<Image>();
-
-        menu = FindObjectOfType<MenuWindow>();
-        onPointerMouseEnter = menu.onPointerMouseEnter;
+         
     }
     private void OnEnable()
     { 
@@ -83,14 +78,12 @@ public abstract class DraggableItemBase : MonoBehaviour, IPointerEnterHandler, I
     public virtual void OnPointerEnter(PointerEventData eventData)
     {
         context.LineEnable(line);
-        context.PointerEnter();
-        reg?.FindCurrentDraggableItem();
-        onPointerMouseEnter?.Invoke();
+        context.PointerEnter(); 
     }
 
     public virtual void OnPointerExit(PointerEventData eventData)
     { 
-        context.LineDisable(line);
+        context.LineDisable(line); 
         context.PointerExit(); 
     }
 
