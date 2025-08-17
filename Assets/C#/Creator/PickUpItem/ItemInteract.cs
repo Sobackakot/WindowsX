@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,14 +6,22 @@ public class ItemInteract : MonoBehaviour, IPointerClickHandler
 {
     private Transform transParent;
     [SerializeField] private GameObject prefab;
+    [field: SerializeField] public TMP_InputField inputField { get; private set; }
+ 
 
     private float lastClickTime = 0f; //seconds to check the elapsed time between clicks
     private float doubleClickThreshold = 0.3f; //time between double clicks
 
 
     private GameObject window;
+
+    private void Awake()
+    {
+        inputField = GetComponentInChildren<TMP_InputField>();
+    }
     private void Start()
     {
+        inputField?.gameObject.SetActive(false);
         transParent = GetComponentInParent<HashMainCanvas>()?.transform;
     }
     public void OnPointerClick(PointerEventData eventData)

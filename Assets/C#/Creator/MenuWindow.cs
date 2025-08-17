@@ -1,7 +1,8 @@
 using Drag.RegisterItem;
 using System;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuWindow : MonoBehaviour 
 { 
@@ -57,11 +58,14 @@ public class MenuWindow : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-  
+
     public void RenameItem()
     {
-
+        if (registry != null && currentItemData != null)
+        {
+            currentItemData.GetComponent<ItemInteract>().inputField.gameObject.SetActive(true);
+            gameObject.SetActive(false);
+        }
     }
-
    
 }
