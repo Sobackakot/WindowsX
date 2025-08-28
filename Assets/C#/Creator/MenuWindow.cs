@@ -12,7 +12,7 @@ public class MenuWindow : MonoBehaviour
     private Transform mainPanelTrans;
     private RegistrySelectableItems registry;
 
-    private DraggableItemBase currentItemData;
+    private DraggableItemBase currentItem;
     private void Awake()
     { 
         foreach (var item in items)
@@ -35,7 +35,7 @@ public class MenuWindow : MonoBehaviour
     { 
         if (registry.currentDraggableItem != null)
         { 
-            currentItemData = registry.currentDraggableItem; 
+            currentItem = registry.currentDraggableItem; 
         }
     }
     public void CreateItem(ItemData itemData)
@@ -50,20 +50,20 @@ public class MenuWindow : MonoBehaviour
     }
     public void RemoveItem()
     {
-        if (registry != null && currentItemData != null)
+        if (registry != null && currentItem != null)
         { 
             registry.FindCurrentDraggableItem(); 
-            registry.RemoveItem(currentItemData?.currentItemData.id);
-            currentItemData = null;
+            registry.RemoveItem(currentItem?.currentItemData.id);
+            currentItem = null;
             gameObject.SetActive(false);
         }
     }
 
     public void RenameItem()
     {
-        if (registry != null && currentItemData != null)
+        if (registry != null && currentItem != null)
         {
-            currentItemData.GetComponent<ItemInteract>().inputField.gameObject.SetActive(true);
+            currentItem.GetComponent<ItemInteract>().inputField?.gameObject.SetActive(true);
             gameObject.SetActive(false);
         }
     }

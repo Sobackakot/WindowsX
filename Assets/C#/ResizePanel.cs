@@ -17,11 +17,13 @@ namespace Drag.Resize
         private Canvas canvas;
 
         private void Awake()
-        {
-            canvas = GetComponentInParent<Canvas>();
+        { 
             target = GetComponentInParent<HashWindowResizePanel>().rectTransform;
         }
-
+        private void Start()
+        {
+            canvas = GetComponentInParent<Canvas>();
+        }
         public void OnDrag(PointerEventData eventData)
         {
             Vector2 delta = eventData.delta / canvas.scaleFactor;

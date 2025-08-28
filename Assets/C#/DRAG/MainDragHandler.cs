@@ -38,7 +38,7 @@ namespace Drag.Item.Maim
         } 
 
         public void OnBeginDrag(PointerEventData eventData)
-        {  
+        {
             registry?.FindCurrentDraggableItem();
             singleBeginDrag?.OnSingleBeginDrag(eventData, registry.currentDraggableItem); 
             isDraggingAll = multipleBeginDrag.OnMultipleBeginDrag(eventData, registry.currentDraggableItem); 
